@@ -1,0 +1,6 @@
+node_modules
+coverage
+es
+lib
+build
+dist

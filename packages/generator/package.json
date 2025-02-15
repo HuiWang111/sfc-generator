@@ -1,0 +1,35 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "compile": "rm -rf es && rm -rf lib && npm run compile:es && npm run compile:cjs",
+    "compile:es": "tsc",
+    "compile:cjs": "tsc --module commonjs --outDir ./lib",
+    "prepublishOnly": "npm run compile"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./es/index.d.ts",
+        "default": "./es/index.js"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      }
+    }
+  },
+  "keywords": [
+    "sfc",
+    "generator",
+    "vue"
+  ],
+  "author": "kennys wang <kennys_wang@163.com>",
+  "license": "ISC"
+}
