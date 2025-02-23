@@ -2,14 +2,14 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "NodeNext",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "nodenext",
     "strict": true,
-    "skipLibCheck": true,
+    "declaration": true,
     "outDir": "es",
     "removeComments": true,
-    "declaration": true,
-    "moduleResolution": "nodenext"
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts"

@@ -1,6 +1,7 @@
-import { parseComponent, compileTemplate, compileScript, compileStyle } from '@vue/compiler-sfc'
-import { readFile } from 'fs/promises'
-import { join } from 'path'
+/* eslint-disable no-console */
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import { compileStyle, compileTemplate, parseComponent } from '@vue/compiler-sfc'
 
 main()
 
@@ -17,15 +18,15 @@ async function main() {
     console.log(template.code)
     const ast = template.ast as Record<string, any>
     console.log(ast)
-    console.log(ast.children[0].children[2].children[2])
+    console.log(ast.children[0].children[2])
   }
 
-  
-  const script = compileScript(sfcDescriptor)
+  // const script = compileScript(sfcDescriptor)
   // console.log(script.content)
 
   sfcDescriptor.styles.forEach((style) => {
-    const res = compileStyle({
+    // const res =
+    compileStyle({
       source: style.content,
       filename: '',
       id: 'a',

@@ -1,16 +1,16 @@
 {
   "name": "playground",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "private": true,
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "c": "ts-node ./src/compiler-test/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@vue/compiler-sfc": "2"
   }

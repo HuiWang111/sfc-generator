@@ -2,17 +2,13 @@
   "name": "generator",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "es/index.d.ts",
-  "scripts": {
-    "test": "jest --coverage",
-    "test:watch": "jest --watch",
-    "compile": "rm -rf es && rm -rf lib && npm run compile:es && npm run compile:cjs",
-    "compile:es": "tsc",
-    "compile:cjs": "tsc --module commonjs --outDir ./lib",
-    "prepublishOnly": "npm run compile"
-  },
+  "author": "kennys wang <kennys_wang@163.com>",
+  "license": "ISC",
+  "keywords": [
+    "sfc",
+    "generator",
+    "vue"
+  ],
   "exports": {
     ".": {
       "import": {
@@ -25,11 +21,18 @@
       }
     }
   },
-  "keywords": [
-    "sfc",
-    "generator",
-    "vue"
-  ],
-  "author": "kennys wang <kennys_wang@163.com>",
-  "license": "ISC"
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "compile": "rm -rf es && rm -rf lib && npm run compile:es && npm run compile:cjs",
+    "compile:es": "tsc",
+    "compile:cjs": "tsc --module commonjs --outDir ./lib",
+    "prepublishOnly": "npm run compile"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "2"
+  }
 }
