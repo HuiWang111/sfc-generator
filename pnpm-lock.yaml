@@ -34,7 +34,17 @@ importers:
         version: 5.7.3
 
   packages/generator:
+    dependencies:
+      '@babel/generator':
+        specifier: ^7.26.9
+        version: 7.26.9
     devDependencies:
+      '@babel/parser':
+        specifier: ^7.26.9
+        version: 7.26.9
+      '@types/babel__generator':
+        specifier: ^7.6.8
+        version: 7.6.8
       '@vue/compiler-sfc':
         specifier: '2'
         version: 2.7.16

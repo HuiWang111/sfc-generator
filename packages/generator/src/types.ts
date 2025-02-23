@@ -1,3 +1,5 @@
+import type generate from '@babel/generator'
+
 export enum TemplateNodeType {
   Element = 1,
   Interpolation = 2, // 插值表达式
@@ -33,15 +35,15 @@ export type TemplateNode =
 export interface ElementNode {
   type: TemplateNodeType.Element
   tag: string
-  attrs: TemplateNodeAttr[]
-  attrsList: Omit<TemplateNodeAttr, 'dynamic'>[]
-  attrsMap: Record<string, string> // 包含 events / class
-  rawAttrsMap: Record<string, string>
+  attrs?: TemplateNodeAttr[]
+  attrsList?: Omit<TemplateNodeAttr, 'dynamic'>[]
+  attrsMap?: Record<string, string> // 包含 events / class
+  rawAttrsMap?: Record<string, string>
   parent?: TemplateNode | undefined
   children: TemplateNode[]
-  plain: boolean
-  static: boolean
-  staticRoot: boolean
+  plain?: boolean
+  static?: boolean
+  staticRoot?: boolean
   events?: Record<string, {
     value: string
     dynamic: boolean
@@ -69,5 +71,13 @@ export interface TextNode {
 
 export interface GenerateOptions {
   breakOnAttrs?: number
-  indent?: number
+  indentSize?: number
+  autoIndent?: boolean
+}
+
+export type BabelNode = Parameters<typeof generate>[0]
+
+export interface ScriptAttrs {
+  setup?: boolean
+  lang?: string
 }

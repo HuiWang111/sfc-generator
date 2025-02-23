@@ -2,7 +2,7 @@
   <form-creator-config-provider :locale="locale">
     <div class="container">
       <div class="submit-container">
-        <a-button type="primary" @click="handleSubmit" class="submit-btn">{{$t('saveBtn')}}</a-button>
+        <a-button type="primary" @click="handleSubmit" class="submit-btn" disabled>{{$t('saveBtn')}}</a-button>
       </div>
       <div
         v-if="a"
@@ -23,6 +23,6 @@
   </form-creator-config-provider>
 </template>
 
-<script>
-export default {}
+<script setup lang="ts">
+const a = 1
 </script>

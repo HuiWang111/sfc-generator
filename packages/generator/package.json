@@ -32,7 +32,12 @@
     "compile:cjs": "tsc --module commonjs --outDir ./lib",
     "prepublishOnly": "npm run compile"
   },
+  "dependencies": {
+    "@babel/generator": "^7.26.9"
+  },
   "devDependencies": {
+    "@babel/parser": "^7.26.9",
+    "@types/babel__generator": "^7.6.8",
     "@vue/compiler-sfc": "2"
   }
 }

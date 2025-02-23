@@ -5,8 +5,8 @@ export class Template {
   constructor(private options: GenerateOptions = {}) {}
 
   private padCode(str: string, indentCount: number) {
-    const { indent = 2 } = this.options
-    const spaceCount = indent * indentCount
+    const { indentSize = 2 } = this.options
+    const spaceCount = indentSize * indentCount
     return str.padStart(str.length + spaceCount)
   }
 
@@ -15,7 +15,7 @@ export class Template {
     indentCount: number,
   ): [string, boolean] {
     const { breakOnAttrs = 2 } = this.options
-    const attrEntries = Object.entries(node.attrsMap)
+    const attrEntries = Object.entries(node.attrsMap || {})
     if (!attrEntries.length) {
       return ['', false]
     }
@@ -24,10 +24,14 @@ export class Template {
     const attrCodes = (
       attrEntries
         .map(([key, value]) => {
+          const expression = value === '' || String(value) === 'true'
+            ? key.replace(/^:/, '')
+            : `${key}="${value}"`
+
           if (shouldBreak) {
-            return this.padCode(`${key}="${value}"`, indentCount)
+            return this.padCode(expression, indentCount)
           }
-          return `${key}="${value}"`
+          return expression
         })
     )
 
@@ -45,10 +49,12 @@ export class Template {
     if (!node.children || !node.children.length) {
       return this.padCode('/>', indentCount)
     }
+
+    const { autoIndent = true } = this.options
     const childrenCode = (
       node.children
         .map((c) => {
-          return this.generate(c, indentCount + 1)
+          return this.generate(c, autoIndent ? indentCount + 1 : indentCount)
         })
         .join('')
     )
@@ -70,7 +76,8 @@ export class Template {
       return this.padCode(node.text, indentCount)
     }
 
-    const [attrCode, shouldBreak] = this.generateAttrCode(node, indentCount + 1)
+    const { autoIndent = true } = this.options
+    const [attrCode, shouldBreak] = this.generateAttrCode(node, autoIndent ? indentCount + 1 : indentCount)
     const startTag = this.padCode(`<${node.tag}`, indentCount)
     const endTag = this.generateEndTag(node, indentCount, shouldBreak)
 
