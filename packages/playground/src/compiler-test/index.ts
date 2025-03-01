@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable no-console */
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
@@ -18,20 +19,20 @@ async function main() {
     // console.log(template.code)
     const ast = template.ast as Record<string, any>
     // console.log(ast)
-    console.log(ast.children[0].children[0].children[0])
+    // console.log(ast.children[0].children[0].children[0])
   }
 
   const script = compileScript(sfcDescriptor)
-  console.log(script)
+  // console.log(script)
 
   sfcDescriptor.styles.forEach((style) => {
-    // const res =
-    compileStyle({
+    const res = compileStyle({
       source: style.content,
       filename: '',
       id: 'a',
     })
 
+    console.log(res.rawResult)
     // console.log(res.code)
     // console.log(res.rawResult)
   })

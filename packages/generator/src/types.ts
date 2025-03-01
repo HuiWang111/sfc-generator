@@ -1,4 +1,6 @@
 import type generate from '@babel/generator'
+import type { GeneratorOptions } from '@babel/generator'
+import type { SFCBlock } from '@vue/compiler-sfc'
 
 export enum TemplateNodeType {
   Element = 1,
@@ -80,4 +82,17 @@ export type BabelNode = Parameters<typeof generate>[0]
 export interface ScriptAttrs {
   setup?: boolean
   lang?: string
+}
+
+export interface SFCGenerateOptions {
+  template: {
+    node: TemplateNode
+    options?: GenerateOptions
+  }
+  script?: {
+    node: BabelNode
+    attrs?: ScriptAttrs
+    options?: GeneratorOptions
+  }
+  styles?: SFCBlock[]
 }

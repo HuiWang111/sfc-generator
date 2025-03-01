@@ -26,3 +26,10 @@
 <script setup lang="ts">
 const a = 1
 </script>
+
+<style scoped>
+.container {
+  width: 100%;
+  height: 100%;
+}
+</style>
