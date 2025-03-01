@@ -36,6 +36,9 @@ export function generateScript(
 }
 
 export function generateStyle(styles: SFCBlock[]) {
+  if (!styles.length)
+    return ''
+
   const template = new Template({
     autoIndent: false,
   })
@@ -73,7 +76,7 @@ export function generateComponent(opts: SFCGenerateOptions) {
   if (opts.script) {
     list.push(generateScript(opts.script.node, opts.script.attrs, opts.script.options))
   }
-  if (opts.styles) {
+  if (opts.styles && opts.styles.length) {
     list.push(generateStyle(opts.styles))
   }
 
