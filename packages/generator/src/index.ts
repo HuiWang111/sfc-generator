@@ -1,16 +1,36 @@
 import type { GeneratorOptions } from '@babel/generator'
 import type { SFCBlock } from '@vue/compiler-sfc'
-import type { BabelNode, GenerateOptions, ScriptAttrs, SFCGenerateOptions, TemplateNode, TextNode } from './types'
+import type {
+  BabelNode,
+  GenerateOptions,
+  ScriptAttrs,
+  SFCGenerateOptions,
+  TemplateNode,
+  TextNode,
+} from './types'
 import generate from '@babel/generator'
+import { TemplateNodeType } from './constants'
 import { Template } from './template'
-import { TemplateNodeType } from './types'
 
+/**
+ * 用于生成 template 代码的函数
+ * @param node template 代码的 ast
+ * @param options 生成配置
+ * @returns template 代码
+ */
 export function generateTemplate(node: TemplateNode, options: GenerateOptions = {}) {
   const template = new Template(options)
   const content = template.generate(node)
   return ['<template>', content, '</template>'].join('\n')
 }
 
+/**
+ * 用于生成 script 代码的函数
+ * @param node babel 的 ast node
+ * @param attrs script 标签的属性
+ * @param opts 生成配置
+ * @returns script 代码
+ */
 export function generateScript(
   node: BabelNode,
   attrs: ScriptAttrs = {},
@@ -35,6 +55,11 @@ export function generateScript(
   )
 }
 
+/**
+ * 用于生成 style 代码的函数
+ * @param styles 生成 style 的 SFCBlock
+ * @returns style 的代码
+ */
 export function generateStyle(styles: SFCBlock[]) {
   if (!styles.length)
     return ''
@@ -68,6 +93,11 @@ export function generateStyle(styles: SFCBlock[]) {
   }).join('\n\n')
 }
 
+/**
+ * 用于生成单文件组件代码的函数
+ * @param opts 生成配置
+ * @returns 单文件组件的代码
+ */
 export function generateComponent(opts: SFCGenerateOptions) {
   const list: string[] = []
 
@@ -82,3 +112,10 @@ export function generateComponent(opts: SFCGenerateOptions) {
 
   return list.join('\n\n')
 }
+
+export type {
+  GenerateOptions,
+  ScriptAttrs,
+  SFCGenerateOptions,
+  TemplateNode,
+} from './types'

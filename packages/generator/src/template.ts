@@ -1,5 +1,5 @@
 import type { ElementNode, GenerateOptions, TemplateNode } from './types'
-import { TemplateNodeType } from './types'
+import { TemplateNodeType } from './constants'
 
 export class Template {
   constructor(private options: GenerateOptions = {}) {}

@@ -4,3 +4,5 @@ es
 lib
 build
 dist
+packages/generator/docs/README.md
+packages/generator/docs/globals.md

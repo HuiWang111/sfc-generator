@@ -1,12 +1,7 @@
 import type generate from '@babel/generator'
 import type { GeneratorOptions } from '@babel/generator'
 import type { SFCBlock } from '@vue/compiler-sfc'
-
-export enum TemplateNodeType {
-  Element = 1,
-  Interpolation = 2, // 插值表达式
-  Text = 3,
-}
+import type { TemplateNodeType } from './constants'
 
 export interface TemplateNodeAttr {
   name: string

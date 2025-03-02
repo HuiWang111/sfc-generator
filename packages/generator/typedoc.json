@@ -1,0 +1,6 @@
+{
+  "plugin": ["typedoc-plugin-markdown"],
+  "out": "docs",
+  "entryPoints": ["src/index.ts"],
+  "excludeExternals": true
+}

@@ -1,5 +1,5 @@
 {
-  "name": "generator",
+  "name": "@asiimov/sfc-generator",
   "version": "1.0.0",
   "description": "",
   "author": "kennys wang <kennys_wang@163.com>",
@@ -30,7 +30,8 @@
     "compile": "rm -rf es && rm -rf lib && npm run compile:es && npm run compile:cjs",
     "compile:es": "tsc",
     "compile:cjs": "tsc --module commonjs --outDir ./lib",
-    "prepublishOnly": "npm run compile"
+    "prepublishOnly": "npm run compile",
+    "docs": "typedoc src/index.ts --disableSources"
   },
   "dependencies": {
     "@babel/generator": "^7.26.9"
