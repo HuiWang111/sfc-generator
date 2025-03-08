@@ -40,5 +40,9 @@
     "@babel/parser": "^7.26.9",
     "@types/babel__generator": "^7.6.8",
     "@vue/compiler-sfc": "2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
