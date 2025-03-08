@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "pub": "lerna publish --no-private"
+    "pub": "lerna publish --no-private --access public"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.3.0",
