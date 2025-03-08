@@ -1,3 +1,7 @@
+**@asiimov/sfc-generator**
+
+***
+
 # @asiimov/sfc-generator
 
 > Utilities for generate Vue Single File Components
