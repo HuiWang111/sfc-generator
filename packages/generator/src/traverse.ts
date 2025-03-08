@@ -6,8 +6,10 @@ export function traverse(
   node: TemplateNode,
   callback: (path: Path) => void,
 ) {
-  const path = new Path(node)
-  callback(path)
+  if (!node.__skip__) {
+    const path = new Path(node)
+    callback(path)
+  }
 
   if (
     isElementNode(node)
