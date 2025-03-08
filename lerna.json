@@ -8,6 +8,9 @@
   "command": {
     "version": {
       "allowBranch": "master"
+    },
+    "publish": {
+      "access": true
     }
   },
   "ignoreChanges": [
