@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test path remove should work 1`] = `
+"<template>
+  <form-creator-config-provider :locale="locale"  />
+</template>"
+`;
+
+exports[`test path replaceWith should work 1`] = `
+"<template>
+  <form-creator-config-provider :locale="locale">
+    <div>
+      new node
+    </div>
+  </form-creator-config-provider>
+</template>"
+`;

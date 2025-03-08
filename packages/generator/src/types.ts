@@ -52,6 +52,7 @@ export interface ElementNode {
   for?: string // 被循环的变量，eg: v-for="data in list" 中的 list
   directives?: TemplateNodeDirective[]
   model?: TemplateNodeModel
+  __skip__?: boolean
 }
 
 export interface InterpolationNode {
@@ -59,11 +60,15 @@ export interface InterpolationNode {
   tokens: object[]
   expression: string
   text: string
+  parent?: TemplateNode | undefined
+  __skip__?: boolean
 }
 
 export interface TextNode {
   type: TemplateNodeType.Text
   text: string
+  parent?: TemplateNode | undefined 
+  __skip__?: boolean
 }
 
 export interface GenerateOptions {

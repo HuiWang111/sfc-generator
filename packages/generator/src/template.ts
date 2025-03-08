@@ -1,5 +1,5 @@
 import type { ElementNode, GenerateOptions, TemplateNode } from './types'
-import { TemplateNodeType } from './constants'
+import { isInterpolationNode, isTextNode } from './is'
 
 export class Template {
   constructor(private options: GenerateOptions = {}) {}
@@ -67,10 +67,10 @@ export class Template {
 
   generate(node: TemplateNode, indentCount = 1): string {
     if (
-      node.type === TemplateNodeType.Interpolation
-      || node.type === TemplateNodeType.Text
+      isInterpolationNode(node) ||
+      isTextNode(node)
     ) {
-      if (node.type === TemplateNodeType.Text && node.text === ' ') {
+      if (isTextNode(node) && node.text === ' ') {
         return '\n'
       }
       return this.padCode(node.text, indentCount)
