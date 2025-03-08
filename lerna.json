@@ -10,7 +10,8 @@
       "allowBranch": "master"
     },
     "publish": {
-      "access": true
+      "registry": "https://registry.npmjs.org/",
+      "access": "public"
     }
   },
   "ignoreChanges": [
