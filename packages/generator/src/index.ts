@@ -15,6 +15,8 @@ export {
   isTextNode,
 } from './is'
 
+export { Path } from './path'
+
 export { traverse } from './traverse'
 
 export type {
