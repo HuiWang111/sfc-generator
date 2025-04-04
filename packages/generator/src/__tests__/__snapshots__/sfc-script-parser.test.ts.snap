@@ -27,6 +27,335 @@ exports[`sfc script parser should work options create data should work 3`] = `
 };"
 `;
 
+exports[`sfc script parser should work options update computed should work 1`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      firstName: 'Davide',
+      lastName: 'Li'
+    };
+  },
+  computed: {
+    fullName() {
+      return this.firstName + ' ' + this.lastName;
+    },
+    reverseName() {
+      return this.lastName + ' ' + this.firstName;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update computed should work 2`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      firstName: 'Davide',
+      lastName: 'Li'
+    };
+  },
+  computed: {
+    fullName() {
+      return this.firstName + ' ' + this.lastName;
+    },
+    reverseName() {
+      return this.lastName + this.firstName;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update computed should work 3`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      firstName: 'Davide',
+      lastName: 'Li'
+    };
+  },
+  computed: {
+    fullName() {
+      return this.firstName + ' ' + this.lastName;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update computed should work 4`] = `
+Node {
+  "async": false,
+  "body": Node {
+    "body": [
+      Node {
+        "argument": Node {
+          "end": 199,
+          "left": Node {
+            "end": 183,
+            "left": Node {
+              "computed": false,
+              "end": 177,
+              "loc": SourceLocation {
+                "end": Position {
+                  "column": 27,
+                  "index": 177,
+                  "line": 11,
+                },
+                "filename": undefined,
+                "identifierName": undefined,
+                "start": Position {
+                  "column": 13,
+                  "index": 163,
+                  "line": 11,
+                },
+              },
+              "object": Node {
+                "end": 167,
+                "loc": SourceLocation {
+                  "end": Position {
+                    "column": 17,
+                    "index": 167,
+                    "line": 11,
+                  },
+                  "filename": undefined,
+                  "identifierName": undefined,
+                  "start": Position {
+                    "column": 13,
+                    "index": 163,
+                    "line": 11,
+                  },
+                },
+                "start": 163,
+                "type": "ThisExpression",
+              },
+              "property": Node {
+                "end": 177,
+                "loc": SourceLocation {
+                  "end": Position {
+                    "column": 27,
+                    "index": 177,
+                    "line": 11,
+                  },
+                  "filename": undefined,
+                  "identifierName": "firstName",
+                  "start": Position {
+                    "column": 18,
+                    "index": 168,
+                    "line": 11,
+                  },
+                },
+                "name": "firstName",
+                "start": 168,
+                "type": "Identifier",
+              },
+              "start": 163,
+              "type": "MemberExpression",
+            },
+            "loc": SourceLocation {
+              "end": Position {
+                "column": 33,
+                "index": 183,
+                "line": 11,
+              },
+              "filename": undefined,
+              "identifierName": undefined,
+              "start": Position {
+                "column": 13,
+                "index": 163,
+                "line": 11,
+              },
+            },
+            "operator": "+",
+            "right": Node {
+              "end": 183,
+              "extra": {
+                "raw": "' '",
+                "rawValue": " ",
+              },
+              "loc": SourceLocation {
+                "end": Position {
+                  "column": 33,
+                  "index": 183,
+                  "line": 11,
+                },
+                "filename": undefined,
+                "identifierName": undefined,
+                "start": Position {
+                  "column": 30,
+                  "index": 180,
+                  "line": 11,
+                },
+              },
+              "start": 180,
+              "type": "StringLiteral",
+              "value": " ",
+            },
+            "start": 163,
+            "type": "BinaryExpression",
+          },
+          "loc": SourceLocation {
+            "end": Position {
+              "column": 49,
+              "index": 199,
+              "line": 11,
+            },
+            "filename": undefined,
+            "identifierName": undefined,
+            "start": Position {
+              "column": 13,
+              "index": 163,
+              "line": 11,
+            },
+          },
+          "operator": "+",
+          "right": Node {
+            "computed": false,
+            "end": 199,
+            "loc": SourceLocation {
+              "end": Position {
+                "column": 49,
+                "index": 199,
+                "line": 11,
+              },
+              "filename": undefined,
+              "identifierName": undefined,
+              "start": Position {
+                "column": 36,
+                "index": 186,
+                "line": 11,
+              },
+            },
+            "object": Node {
+              "end": 190,
+              "loc": SourceLocation {
+                "end": Position {
+                  "column": 40,
+                  "index": 190,
+                  "line": 11,
+                },
+                "filename": undefined,
+                "identifierName": undefined,
+                "start": Position {
+                  "column": 36,
+                  "index": 186,
+                  "line": 11,
+                },
+              },
+              "start": 186,
+              "type": "ThisExpression",
+            },
+            "property": Node {
+              "end": 199,
+              "loc": SourceLocation {
+                "end": Position {
+                  "column": 49,
+                  "index": 199,
+                  "line": 11,
+                },
+                "filename": undefined,
+                "identifierName": "lastName",
+                "start": Position {
+                  "column": 41,
+                  "index": 191,
+                  "line": 11,
+                },
+              },
+              "name": "lastName",
+              "start": 191,
+              "type": "Identifier",
+            },
+            "start": 186,
+            "type": "MemberExpression",
+          },
+          "start": 163,
+          "type": "BinaryExpression",
+        },
+        "end": 199,
+        "loc": SourceLocation {
+          "end": Position {
+            "column": 49,
+            "index": 199,
+            "line": 11,
+          },
+          "filename": undefined,
+          "identifierName": undefined,
+          "start": Position {
+            "column": 6,
+            "index": 156,
+            "line": 11,
+          },
+        },
+        "start": 156,
+        "type": "ReturnStatement",
+      },
+    ],
+    "directives": [],
+    "end": 205,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 5,
+        "index": 205,
+        "line": 12,
+      },
+      "filename": undefined,
+      "identifierName": undefined,
+      "start": Position {
+        "column": 15,
+        "index": 148,
+        "line": 10,
+      },
+    },
+    "start": 148,
+    "type": "BlockStatement",
+  },
+  "computed": false,
+  "end": 205,
+  "generator": false,
+  "id": null,
+  "key": Node {
+    "end": 145,
+    "loc": SourceLocation {
+      "end": Position {
+        "column": 12,
+        "index": 145,
+        "line": 10,
+      },
+      "filename": undefined,
+      "identifierName": "fullName",
+      "start": Position {
+        "column": 4,
+        "index": 137,
+        "line": 10,
+      },
+    },
+    "name": "fullName",
+    "start": 137,
+    "type": "Identifier",
+  },
+  "kind": "method",
+  "loc": SourceLocation {
+    "end": Position {
+      "column": 5,
+      "index": 205,
+      "line": 12,
+    },
+    "filename": undefined,
+    "identifierName": undefined,
+    "start": Position {
+      "column": 4,
+      "index": 137,
+      "line": 10,
+    },
+  },
+  "method": true,
+  "params": [],
+  "start": 137,
+  "type": "ObjectMethod",
+}
+`;
+
 exports[`sfc script parser should work options update data should work 1`] = `
 "export default {
   name: 'AInput',

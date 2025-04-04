@@ -9,7 +9,7 @@ export class DataOption implements OptionOperator<ObjectExpressionOptionsChain> 
     private _parent: ObjectExpressionOptionsChain,
   ) {}
 
-  public node() {
+  node() {
     return this._node
   }
 

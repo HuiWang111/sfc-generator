@@ -105,9 +105,9 @@ export interface ScriptParseOptions {
 }
 
 export interface OptionOperator<P> {
-  add: (name: string, value: Expression | PatternLike) => any
-  update: (name: string, value: Expression | PatternLike) => any
+  add: (...args: any[]) => any
+  update: (...args: any[]) => any
   remove: (name: string) => any
-  get: (name: string) => Expression | PatternLike | null
+  get: (name: string) => any
   parent: () => P
 }

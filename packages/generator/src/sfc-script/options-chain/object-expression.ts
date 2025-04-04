@@ -2,12 +2,14 @@ import type { NodePath } from '@babel/traverse'
 import type { ObjectExpression, ObjectMethod } from '@babel/types'
 import * as t from '@babel/types'
 import {
+  ComputedOption,
   DataOption,
 } from './options-properties'
 
 export class ObjectExpressionOptionsChain {
   // private isSetup: boolean
   private dataOption: DataOption | null = null
+  private computedOption: ComputedOption | null = null
 
   constructor(private _node: NodePath<ObjectExpression>) {}
 
@@ -49,5 +51,34 @@ export class ObjectExpressionOptionsChain {
     this._node.pushContainer('properties', objectMethod)
     this.dataOption = new DataOption(objectMethod, this)
     return this.dataOption
+  }
+
+  computed() {
+    if (this.computedOption)
+      return this.computedOption
+
+    const computedNode = (
+      this._node.get('properties')
+        .find((prop): prop is NodePath<t.ObjectProperty> => {
+          if (prop.isObjectProperty()) {
+            const keyNode = prop.get('key')
+            return keyNode.isIdentifier() && keyNode.node.name === 'computed'
+          }
+          return false
+        })
+    )
+
+    if (computedNode) {
+      this.computedOption = new ComputedOption(computedNode.node, this)
+      return this.computedOption
+    }
+
+    const objectProperty = t.objectProperty(
+      t.identifier('computed'),
+      t.objectExpression([]),
+    )
+    this._node.pushContainer('properties', objectProperty)
+    this.computedOption = new ComputedOption(objectProperty, this)
+    return this.computedOption
   }
 }
