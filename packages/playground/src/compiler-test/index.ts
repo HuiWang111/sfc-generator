@@ -7,7 +7,7 @@ import { compileScript, compileStyle, compileTemplate, parseComponent } from '@v
 main()
 
 async function main() {
-  const sfc = await readFile(join(__dirname, 'sfc/form.vue'), 'utf-8')
+  const sfc = await readFile(join(__dirname, 'sfc/default.vue'), 'utf-8')
   const sfcDescriptor = parseComponent(sfc)
 
   if (sfcDescriptor.template) {
@@ -23,7 +23,7 @@ async function main() {
   }
 
   const script = compileScript(sfcDescriptor)
-  // console.log(script)
+  console.log(script)
 
   sfcDescriptor.styles.forEach((style) => {
     const res = compileStyle({
@@ -32,7 +32,7 @@ async function main() {
       id: 'a',
     })
 
-    console.log(res.rawResult)
+    // console.log(res.rawResult)
     // console.log(res.code)
     // console.log(res.rawResult)
   })

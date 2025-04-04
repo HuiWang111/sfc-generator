@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sfc script parser should work options create data should work 1`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      number: 1
+    };
+  }
+};"
+`;
+
+exports[`sfc script parser should work options create data should work 2`] = `
+{
+  "type": "NumericLiteral",
+  "value": 1,
+}
+`;
+
+exports[`sfc script parser should work options create data should work 3`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {};
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update data should work 1`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      value: '1',
+      number: 1
+    };
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update data should work 2`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      value: true,
+      number: 1
+    };
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update data should work 3`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      number: 1
+    };
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update data should work 4`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {};
+  }
+};"
+`;

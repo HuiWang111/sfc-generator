@@ -1,5 +1,5 @@
-import { TemplateNodeType } from "./constants"
-import { ElementNode, InterpolationNode, TemplateNode, TextNode } from "./types"
+import type { ElementNode, InterpolationNode, TemplateNode, TextNode } from './types'
+import { TemplateNodeType } from './constants'
 
 export function isTextNode(node: TemplateNode): node is TextNode {
   return node.type === TemplateNodeType.Text

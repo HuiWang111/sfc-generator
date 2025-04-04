@@ -17,6 +17,10 @@ export {
 
 export { Path } from './path'
 
+export {
+  parse as parseSfcScript,
+} from './sfc-script'
+
 export { traverse } from './traverse'
 
 export type {

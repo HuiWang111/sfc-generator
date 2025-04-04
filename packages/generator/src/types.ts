@@ -1,5 +1,6 @@
 import type generate from '@babel/generator'
 import type { GeneratorOptions } from '@babel/generator'
+import type { Expression, PatternLike } from '@babel/types'
 import type { SFCBlock } from '@vue/compiler-sfc'
 import type { TemplateNodeType } from './constants'
 
@@ -67,7 +68,7 @@ export interface InterpolationNode {
 export interface TextNode {
   type: TemplateNodeType.Text
   text: string
-  parent?: TemplateNode | undefined 
+  parent?: TemplateNode | undefined
   __skip__?: boolean
 }
 
@@ -95,4 +96,18 @@ export interface SFCGenerateOptions {
     options?: GeneratorOptions
   }
   styles?: SFCBlock[]
+}
+
+export interface ScriptParseOptions {
+  setup?: boolean
+  lang?: 'ts' | 'js'
+  jsx?: boolean
+}
+
+export interface OptionOperator<P> {
+  add: (name: string, value: Expression | PatternLike) => any
+  update: (name: string, value: Expression | PatternLike) => any
+  remove: (name: string) => any
+  get: (name: string) => Expression | PatternLike | null
+  parent: () => P
 }
