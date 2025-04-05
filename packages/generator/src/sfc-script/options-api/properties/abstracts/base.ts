@@ -1,4 +1,4 @@
-import type { OptionsApi } from '../options-api'
+import type { OptionsApi } from '../../options-api'
 
 export abstract class BaseOption<N> {
   constructor(
