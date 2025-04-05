@@ -2,20 +2,19 @@ import type { ObjectExpression, ObjectMethod, ObjectProperty } from '@babel/type
 import type { OptionOperator } from '../../../types'
 import type { OptionsApi } from '../options-api'
 import * as t from '@babel/types'
+import { BaseOption } from './base'
 
-export class ComputedOption implements OptionOperator<OptionsApi> {
+export class ComputedOption extends BaseOption<ObjectProperty> implements OptionOperator {
   constructor(
-    private _node: ObjectProperty,
-    private _parent: OptionsApi,
-  ) {}
+    node: ObjectProperty,
+    parent: OptionsApi,
+  ) {
+    super(node, parent)
+  }
 
   private get properties() {
     const value = this._node.value as ObjectExpression
     return value.properties
-  }
-
-  public node() {
-    return this._node
   }
 
   add(prop: ObjectProperty | ObjectMethod) {
@@ -53,9 +52,5 @@ export class ComputedOption implements OptionOperator<OptionsApi> {
         return false
       return t.isIdentifier(prop.key) && prop.key.name === name
     })
-  }
-
-  parent() {
-    return this._parent
   }
 }

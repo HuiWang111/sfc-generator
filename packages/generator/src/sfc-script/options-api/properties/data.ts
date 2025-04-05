@@ -2,18 +2,17 @@ import type { Expression, ObjectMethod, PatternLike, ReturnStatement } from '@ba
 import type { OptionOperator } from '../../../types'
 import type { OptionsApi } from '../options-api'
 import * as t from '@babel/types'
+import { BaseOption } from './base'
 
-export class DataOption implements OptionOperator<OptionsApi> {
+export class DataOption extends BaseOption<ObjectMethod> implements OptionOperator {
   constructor(
-    private _node: ObjectMethod,
-    private _parent: OptionsApi,
-  ) {}
-
-  node() {
-    return this._node
+    node: ObjectMethod,
+    parent: OptionsApi,
+  ) {
+    super(node, parent)
   }
 
-  get returnNode() {
+  private get returnNode() {
     return this._node.body.body.find((i): i is ReturnStatement => {
       return t.isReturnStatement(i)
     })
@@ -64,9 +63,5 @@ export class DataOption implements OptionOperator<OptionsApi> {
       }
     }
     return null
-  }
-
-  parent() {
-    return this._parent
   }
 }

@@ -104,10 +104,9 @@ export interface ScriptParseOptions {
   jsx?: boolean
 }
 
-export interface OptionOperator<P> {
+export interface OptionOperator {
   add: (...args: any[]) => any
   update: (...args: any[]) => any
   remove: (name: string) => any
   get: (name: string) => any
-  parent: () => P
 }
