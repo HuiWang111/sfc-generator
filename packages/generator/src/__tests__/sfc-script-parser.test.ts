@@ -212,4 +212,52 @@ describe('sfc script parser should work', () => {
     const { code } = generate(ast)
     expect(code).toMatchSnapshot()
   })
+
+  it('options update methods should work', () => {
+    const js = `export default {
+  name: 'AInput',
+  methods: {
+    handleChange(val) {
+      this.value = val
+    }
+  },
+}`
+
+    const { ast, api } = parse(js)
+    if (!api)
+      return
+
+    api.methods().add(
+      t.objectMethod(
+        'method',
+        t.identifier('handleInput'),
+        [t.identifier('val')],
+        t.blockStatement([
+          template.statement('this.value = val')(),
+        ]),
+      ),
+    )
+    let { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+
+    api.methods().update(
+      t.objectMethod(
+        'method',
+        t.identifier('handleChange'),
+        [t.identifier('val')],
+        t.blockStatement([
+          template.statement('this.data = val')(),
+        ]),
+      ),
+    );
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    api.methods().remove('handleChange');
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    const value = api.methods().get('handleInput')
+    expect(value).toMatchSnapshot()
+  })
 })

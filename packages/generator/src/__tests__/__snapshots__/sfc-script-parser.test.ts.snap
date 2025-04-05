@@ -422,6 +422,99 @@ exports[`sfc script parser should work options update data should work 4`] = `
 };"
 `;
 
+exports[`sfc script parser should work options update methods should work 1`] = `
+"export default {
+  name: 'AInput',
+  methods: {
+    handleChange(val) {
+      this.value = val;
+    },
+    handleInput(val) {
+      this.value = val;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update methods should work 2`] = `
+"export default {
+  name: 'AInput',
+  methods: {
+    handleChange(val) {
+      this.data = val;
+    },
+    handleInput(val) {
+      this.value = val;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update methods should work 3`] = `
+"export default {
+  name: 'AInput',
+  methods: {
+    handleInput(val) {
+      this.value = val;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update methods should work 4`] = `
+{
+  "async": false,
+  "body": {
+    "body": [
+      {
+        "expression": {
+          "left": {
+            "computed": false,
+            "loc": undefined,
+            "object": {
+              "loc": undefined,
+              "type": "ThisExpression",
+            },
+            "property": {
+              "loc": undefined,
+              "name": "value",
+              "type": "Identifier",
+            },
+            "type": "MemberExpression",
+          },
+          "loc": undefined,
+          "operator": "=",
+          "right": {
+            "loc": undefined,
+            "name": "val",
+            "type": "Identifier",
+          },
+          "type": "AssignmentExpression",
+        },
+        "loc": undefined,
+        "type": "ExpressionStatement",
+      },
+    ],
+    "directives": [],
+    "type": "BlockStatement",
+  },
+  "computed": false,
+  "generator": false,
+  "key": {
+    "name": "handleInput",
+    "type": "Identifier",
+  },
+  "kind": "method",
+  "params": [
+    {
+      "name": "val",
+      "type": "Identifier",
+    },
+  ],
+  "type": "ObjectMethod",
+}
+`;
+
 exports[`sfc script parser should work options update watch should work 1`] = `
 "export default {
   name: 'AInput',

@@ -1,9 +1,10 @@
 import type { NodePath } from '@babel/traverse'
-import type { ObjectExpression, ObjectMethod } from '@babel/types'
+import type { ObjectExpression, ObjectMethod, ObjectProperty } from '@babel/types'
 import * as t from '@babel/types'
 import {
   ComputedOption,
   DataOption,
+  MethodsOption,
   WatchOption,
 } from './properties'
 
@@ -12,8 +13,17 @@ export class OptionsApi {
   private dataOption: DataOption | null = null
   private computedOption: ComputedOption | null = null
   private watchOption: WatchOption | null = null
+  private methodsOption: MethodsOption | null = null
 
   constructor(private _node: NodePath<ObjectExpression>) {}
+
+  private getOptionNode<T extends ObjectMethod | ObjectProperty>(name: string) {
+    return this._node.get('properties')
+      .find((prop): prop is NodePath<T> => {
+        const keyNode = prop.get('key')
+        return keyNode.isIdentifier() && keyNode.node.name === name
+      })
+  }
 
   get node() {
     return this._node
@@ -24,17 +34,7 @@ export class OptionsApi {
       return this.dataOption
     }
 
-    const dataNode = (
-      this._node.get('properties')
-        .find((prop): prop is NodePath<ObjectMethod> => {
-          if (prop.isObjectMethod()) {
-            const keyNode = prop.get('key')
-            return keyNode.isIdentifier() && keyNode.node.name === 'data'
-          }
-          return false
-        })
-    )
-
+    const dataNode = this.getOptionNode<ObjectMethod>('data')
     if (dataNode) {
       this.dataOption = new DataOption(dataNode.node, this)
       return this.dataOption
@@ -59,17 +59,7 @@ export class OptionsApi {
     if (this.computedOption)
       return this.computedOption
 
-    const computedNode = (
-      this._node.get('properties')
-        .find((prop): prop is NodePath<t.ObjectProperty> => {
-          if (prop.isObjectProperty()) {
-            const keyNode = prop.get('key')
-            return keyNode.isIdentifier() && keyNode.node.name === 'computed'
-          }
-          return false
-        })
-    )
-
+    const computedNode = this.getOptionNode<ObjectProperty>('computed')
     if (computedNode) {
       this.computedOption = new ComputedOption(computedNode.node, this)
       return this.computedOption
@@ -88,17 +78,7 @@ export class OptionsApi {
     if (this.watchOption)
       return this.watchOption
 
-    const watchNode = (
-      this._node.get('properties')
-        .find((prop): prop is NodePath<t.ObjectProperty> => {
-          if (prop.isObjectProperty()) {
-            const keyNode = prop.get('key')
-            return keyNode.isIdentifier() && keyNode.node.name === 'watch'
-          }
-          return false
-        })
-    )
-
+    const watchNode = this.getOptionNode<ObjectProperty>('watch')
     if (watchNode) {
       this.watchOption = new WatchOption(watchNode.node, this)
       return this.watchOption
@@ -111,5 +91,24 @@ export class OptionsApi {
     this._node.pushContainer('properties', objectProperty)
     this.watchOption = new WatchOption(objectProperty, this)
     return this.watchOption
+  }
+
+  methods() {
+    if (this.methodsOption)
+      return this.methodsOption
+
+    const methodsNode = this.getOptionNode<ObjectProperty>('methods')
+    if (methodsNode) {
+      this.methodsOption = new MethodsOption(methodsNode.node, this)
+      return this.methodsOption
+    }
+
+    const objectProperty = t.objectProperty(
+      t.identifier('methods'),
+      t.objectExpression([]),
+    )
+    this._node.pushContainer('properties', objectProperty)
+    this.methodsOption = new MethodsOption(objectProperty, this)
+    return this.methodsOption
   }
 }
