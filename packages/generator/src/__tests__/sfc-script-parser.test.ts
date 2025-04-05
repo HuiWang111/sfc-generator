@@ -14,23 +14,23 @@ describe('sfc script parser should work', () => {
   },
 }`
 
-    const { ast, res } = parse(js)
-    if (!res)
+    const { ast, api } = parse(js)
+    if (!api)
       return
 
-    res.data().add('number', t.numericLiteral(1))
+    api.data().add('number', t.numericLiteral(1))
     let { code } = generate(ast)
     expect(code).toMatchSnapshot()
 
-    res.data().update('value', t.booleanLiteral(true));
+    api.data().update('value', t.booleanLiteral(true));
     ({ code } = generate(ast))
     expect(code).toMatchSnapshot()
 
-    res.data().remove('value');
+    api.data().remove('value');
     ({ code } = generate(ast))
     expect(code).toMatchSnapshot()
 
-    res.data().remove('number');
+    api.data().remove('number');
     ({ code } = generate(ast))
     expect(code).toMatchSnapshot()
   })
@@ -40,18 +40,18 @@ describe('sfc script parser should work', () => {
   name: 'AInput',
 }`
 
-    const { ast, res } = parse(js)
-    if (!res)
+    const { ast, api } = parse(js)
+    if (!api)
       return
 
-    res.data().add('number', t.numericLiteral(1))
+    api.data().add('number', t.numericLiteral(1))
     let { code } = generate(ast)
     expect(code).toMatchSnapshot()
 
-    const value = res.data().get('number')
+    const value = api.data().get('number')
     expect(value).toMatchSnapshot()
 
-    res.data().remove('number');
+    api.data().remove('number');
     ({ code } = generate(ast))
     expect(code).toMatchSnapshot()
   })
@@ -72,13 +72,13 @@ describe('sfc script parser should work', () => {
   },
 }`
 
-    const { ast, res } = parse(js)
-    if (!res)
+    const { ast, api } = parse(js)
+    if (!api)
       return
 
     const returnStatement = template.statement('return this.lastName + \' \' + this.firstName')
 
-    res.computed().add(
+    api.computed().add(
       t.objectMethod(
         'method',
         t.identifier('reverseName'),
@@ -91,7 +91,7 @@ describe('sfc script parser should work', () => {
     let { code } = generate(ast)
     expect(code).toMatchSnapshot()
 
-    res.computed().update(
+    api.computed().update(
       t.objectMethod(
         'method',
         t.identifier('reverseName'),
@@ -104,11 +104,11 @@ describe('sfc script parser should work', () => {
     ({ code } = generate(ast))
     expect(code).toMatchSnapshot()
 
-    res.computed().remove('reverseName');
+    api.computed().remove('reverseName');
     ({ code } = generate(ast))
     expect(code).toMatchSnapshot()
 
-    const value = res.computed().get('fullName')
+    const value = api.computed().get('fullName')
     expect(value).toMatchSnapshot()
   })
 })

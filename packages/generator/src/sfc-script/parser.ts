@@ -2,7 +2,7 @@ import type { ParserOptions } from '@babel/parser'
 import type { ScriptParseOptions } from '../types'
 import { parse as babelParse } from '@babel/parser'
 import traverse from '@babel/traverse'
-import { ObjectExpressionOptionsChain } from './options-chain'
+import { OptionsApi } from './options-api'
 
 export function parse(code: string, options: ScriptParseOptions = {}) {
   const { lang, jsx = false, setup = false } = options
@@ -20,7 +20,7 @@ export function parse(code: string, options: ScriptParseOptions = {}) {
     plugins,
   })
 
-  let res: ObjectExpressionOptionsChain | null = null
+  let api: OptionsApi | null = null
 
   traverse(ast, {
     ExportDefaultDeclaration(path) {
@@ -29,17 +29,17 @@ export function parse(code: string, options: ScriptParseOptions = {}) {
 
       const declarationPath = path.get('declaration')
       if (declarationPath.isObjectExpression()) {
-        res = new ObjectExpressionOptionsChain(declarationPath)
+        api = new OptionsApi(declarationPath)
       }
     },
   })
 
-  if (!res) {
-    throw new Error(`script setup is ${setup}, parse code error`)
+  if (!api) {
+    throw new Error(`script setup attr is ${setup}, parse code error: ${code}`)
   }
 
   return {
-    res: res as ObjectExpressionOptionsChain | null,
+    api: api as OptionsApi,
     ast,
   }
 }

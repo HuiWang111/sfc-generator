@@ -1,12 +1,12 @@
 import type { ObjectExpression, ObjectMethod, ObjectProperty } from '@babel/types'
 import type { OptionOperator } from '../../../types'
-import type { ObjectExpressionOptionsChain } from '../object-expression'
+import type { OptionsApi } from '../options-api'
 import * as t from '@babel/types'
 
-export class ComputedOption implements OptionOperator<ObjectExpressionOptionsChain> {
+export class ComputedOption implements OptionOperator<OptionsApi> {
   constructor(
     private _node: ObjectProperty,
-    private _parent: ObjectExpressionOptionsChain,
+    private _parent: OptionsApi,
   ) {}
 
   private get properties() {

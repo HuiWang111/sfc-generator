@@ -4,9 +4,9 @@ import * as t from '@babel/types'
 import {
   ComputedOption,
   DataOption,
-} from './options-properties'
+} from './properties'
 
-export class ObjectExpressionOptionsChain {
+export class OptionsApi {
   // private isSetup: boolean
   private dataOption: DataOption | null = null
   private computedOption: ComputedOption | null = null
