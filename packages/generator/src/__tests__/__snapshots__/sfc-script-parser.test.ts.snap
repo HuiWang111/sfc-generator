@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`sfc script parser should work options create computed should work 1`] = `
+"export default {
+  name: 'AInput',
+  computed: {
+    name() {
+      return this._name;
+    }
+  }
+};"
+`;
+
 exports[`sfc script parser should work options create data should work 1`] = `
 "export default {
   name: 'AInput',
@@ -23,6 +34,17 @@ exports[`sfc script parser should work options create data should work 3`] = `
   name: 'AInput',
   data() {
     return {};
+  }
+};"
+`;
+
+exports[`sfc script parser should work options create watch should work 1`] = `
+"export default {
+  name: 'AInput',
+  watch: {
+    firstName(val) {
+      this.fullName = val + ' ' + this.lastName;
+    }
   }
 };"
 `;
@@ -398,4 +420,151 @@ exports[`sfc script parser should work options update data should work 4`] = `
     return {};
   }
 };"
+`;
+
+exports[`sfc script parser should work options update watch should work 1`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      firstName: 'Davide',
+      lastName: 'Li',
+      fullName: ''
+    };
+  },
+  watch: {
+    firstName(val) {
+      this.fullName = val + this.lastName;
+    },
+    lastName(val) {
+      this.fullName = this.firstName + ' ' + val;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update watch should work 2`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      firstName: 'Davide',
+      lastName: 'Li',
+      fullName: ''
+    };
+  },
+  watch: {
+    firstName(val) {
+      this.fullName = val + ' ' + this.lastName;
+    },
+    lastName(val) {
+      this.fullName = this.firstName + ' ' + val;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update watch should work 3`] = `
+"export default {
+  name: 'AInput',
+  data() {
+    return {
+      firstName: 'Davide',
+      lastName: 'Li',
+      fullName: ''
+    };
+  },
+  watch: {
+    lastName(val) {
+      this.fullName = this.firstName + ' ' + val;
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update watch should work 4`] = `
+{
+  "async": false,
+  "body": {
+    "body": [
+      {
+        "expression": {
+          "left": {
+            "computed": false,
+            "loc": undefined,
+            "object": {
+              "loc": undefined,
+              "type": "ThisExpression",
+            },
+            "property": {
+              "loc": undefined,
+              "name": "fullName",
+              "type": "Identifier",
+            },
+            "type": "MemberExpression",
+          },
+          "loc": undefined,
+          "operator": "=",
+          "right": {
+            "left": {
+              "left": {
+                "computed": false,
+                "loc": undefined,
+                "object": {
+                  "loc": undefined,
+                  "type": "ThisExpression",
+                },
+                "property": {
+                  "loc": undefined,
+                  "name": "firstName",
+                  "type": "Identifier",
+                },
+                "type": "MemberExpression",
+              },
+              "loc": undefined,
+              "operator": "+",
+              "right": {
+                "extra": {
+                  "raw": "' '",
+                  "rawValue": " ",
+                },
+                "loc": undefined,
+                "type": "StringLiteral",
+                "value": " ",
+              },
+              "type": "BinaryExpression",
+            },
+            "loc": undefined,
+            "operator": "+",
+            "right": {
+              "loc": undefined,
+              "name": "val",
+              "type": "Identifier",
+            },
+            "type": "BinaryExpression",
+          },
+          "type": "AssignmentExpression",
+        },
+        "loc": undefined,
+        "type": "ExpressionStatement",
+      },
+    ],
+    "directives": [],
+    "type": "BlockStatement",
+  },
+  "computed": false,
+  "generator": false,
+  "key": {
+    "name": "lastName",
+    "type": "Identifier",
+  },
+  "kind": "method",
+  "params": [
+    {
+      "name": "val",
+      "type": "Identifier",
+    },
+  ],
+  "type": "ObjectMethod",
+}
 `;

@@ -111,4 +111,105 @@ describe('sfc script parser should work', () => {
     const value = api.computed().get('fullName')
     expect(value).toMatchSnapshot()
   })
+
+  it('options create computed should work', () => {
+    const js = `export default {
+  name: 'AInput',
+}`
+
+    const { ast, api } = parse(js)
+    if (!api)
+      return
+
+    api.computed().add(
+      t.objectMethod(
+        'method',
+        t.identifier('name'),
+        [],
+        t.blockStatement([
+          template.statement('return this._name')(),
+        ]),
+      ),
+    )
+    const { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+  })
+
+  it('options update watch should work', () => {
+    const js = `export default {
+  name: 'AInput',
+  data() {
+    return {
+      firstName: 'Davide',
+      lastName: 'Li',
+      fullName: '',
+    }
+  },
+  watch: {
+    firstName(val) {
+      this.fullName = val + this.lastName
+    }
+  },
+}`
+
+    const { ast, api } = parse(js)
+    if (!api)
+      return
+
+    api.watch().add(
+      t.objectMethod(
+        'method',
+        t.identifier('lastName'),
+        [t.identifier('val')],
+        t.blockStatement([
+          template.statement('this.fullName =  this.firstName + \' \' + val;')(),
+        ]),
+      ),
+    )
+    let { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+
+    api.watch().update(
+      t.objectMethod(
+        'method',
+        t.identifier('firstName'),
+        [t.identifier('val')],
+        t.blockStatement([
+          template.statement('this.fullName = val + \' \' + this.lastName')(),
+        ]),
+      ),
+    );
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    api.watch().remove('firstName');
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    const value = api.watch().get('lastName')
+    expect(value).toMatchSnapshot()
+  })
+
+  it('options create watch should work', () => {
+    const js = `export default {
+  name: 'AInput',
+}`
+
+    const { ast, api } = parse(js)
+    if (!api)
+      return
+
+    api.watch().add(
+      t.objectMethod(
+        'method',
+        t.identifier('firstName'),
+        [t.identifier('val')],
+        t.blockStatement([
+          template.statement('this.fullName = val + \' \' + this.lastName')(),
+        ]),
+      ),
+    )
+    const { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+  })
 })

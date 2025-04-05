@@ -4,12 +4,14 @@ import * as t from '@babel/types'
 import {
   ComputedOption,
   DataOption,
+  WatchOption,
 } from './properties'
 
 export class OptionsApi {
   // private isSetup: boolean
   private dataOption: DataOption | null = null
   private computedOption: ComputedOption | null = null
+  private watchOption: WatchOption | null = null
 
   constructor(private _node: NodePath<ObjectExpression>) {}
 
@@ -80,5 +82,34 @@ export class OptionsApi {
     this._node.pushContainer('properties', objectProperty)
     this.computedOption = new ComputedOption(objectProperty, this)
     return this.computedOption
+  }
+
+  watch() {
+    if (this.watchOption)
+      return this.watchOption
+
+    const watchNode = (
+      this._node.get('properties')
+        .find((prop): prop is NodePath<t.ObjectProperty> => {
+          if (prop.isObjectProperty()) {
+            const keyNode = prop.get('key')
+            return keyNode.isIdentifier() && keyNode.node.name === 'watch'
+          }
+          return false
+        })
+    )
+
+    if (watchNode) {
+      this.watchOption = new WatchOption(watchNode.node, this)
+      return this.watchOption
+    }
+
+    const objectProperty = t.objectProperty(
+      t.identifier('watch'),
+      t.objectExpression([]),
+    )
+    this._node.pushContainer('properties', objectProperty)
+    this.watchOption = new WatchOption(objectProperty, this)
+    return this.watchOption
   }
 }
