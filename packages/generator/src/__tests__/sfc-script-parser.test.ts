@@ -283,4 +283,64 @@ describe('sfc script parser should work', () => {
     const { code } = generate(ast)
     expect(code).toMatchSnapshot()
   })
+
+  it('options update props should work', () => {
+    const js = `export default {
+  name: 'Switch',
+  props: {
+    checked: {
+      type: String,
+      default: false,
+    },
+  },
+}`
+
+    const { ast, api } = parse(js)
+    if (!api)
+      return
+
+    api.props().add(
+      t.objectProperty(
+        t.identifier('loading'),
+        template.expression('{ type: Boolean, default: false }')(),
+      ),
+    )
+    let { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+
+    api.props().update(
+      t.objectProperty(
+        t.identifier('checked'),
+        template.expression('{ type: Boolean, default: false }')(),
+      ),
+    );
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    api.props().remove('checked');
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    const value = api.props().get('loading')
+    expect(value).toMatchSnapshot()
+  })
+
+  it('options create props should work', () => {
+    const js = `export default {
+  name: 'Switch',
+}`
+
+    const { ast, api } = parse(js)
+    if (!api)
+      return
+
+    api.props().add(
+      t.objectProperty(
+        t.identifier('checked'),
+        template.expression('{ type: Boolean, default: false }')(),
+      ),
+    )
+    const { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+  })
 })

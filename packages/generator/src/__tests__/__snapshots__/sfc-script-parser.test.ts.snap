@@ -49,6 +49,18 @@ exports[`sfc script parser should work options create methods should work 1`] = 
 };"
 `;
 
+exports[`sfc script parser should work options create props should work 1`] = `
+"export default {
+  name: 'Switch',
+  props: {
+    checked: {
+      type: Boolean,
+      default: false
+    }
+  }
+};"
+`;
+
 exports[`sfc script parser should work options create watch should work 1`] = `
 "export default {
   name: 'AInput',
@@ -523,6 +535,105 @@ exports[`sfc script parser should work options update methods should work 4`] = 
     },
   ],
   "type": "ObjectMethod",
+}
+`;
+
+exports[`sfc script parser should work options update props should work 1`] = `
+"export default {
+  name: 'Switch',
+  props: {
+    checked: {
+      type: String,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update props should work 2`] = `
+"export default {
+  name: 'Switch',
+  props: {
+    checked: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update props should work 3`] = `
+"export default {
+  name: 'Switch',
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  }
+};"
+`;
+
+exports[`sfc script parser should work options update props should work 4`] = `
+{
+  "computed": false,
+  "decorators": null,
+  "key": {
+    "name": "loading",
+    "type": "Identifier",
+  },
+  "shorthand": false,
+  "type": "ObjectProperty",
+  "value": {
+    "extra": {
+      "parenStart": 0,
+      "parenthesized": true,
+    },
+    "loc": undefined,
+    "properties": [
+      {
+        "computed": false,
+        "key": {
+          "loc": undefined,
+          "name": "type",
+          "type": "Identifier",
+        },
+        "loc": undefined,
+        "shorthand": false,
+        "type": "ObjectProperty",
+        "value": {
+          "loc": undefined,
+          "name": "Boolean",
+          "type": "Identifier",
+        },
+      },
+      {
+        "computed": false,
+        "key": {
+          "loc": undefined,
+          "name": "default",
+          "type": "Identifier",
+        },
+        "loc": undefined,
+        "shorthand": false,
+        "type": "ObjectProperty",
+        "value": {
+          "loc": undefined,
+          "type": "BooleanLiteral",
+          "value": false,
+        },
+      },
+    ],
+    "type": "ObjectExpression",
+  },
 }
 `;
 
