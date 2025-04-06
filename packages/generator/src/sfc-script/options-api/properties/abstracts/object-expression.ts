@@ -1,6 +1,6 @@
 import type { ObjectExpression, ObjectMethod, ObjectProperty } from '@babel/types'
+import type { OptionsApi } from '../..'
 import type { OptionOperator } from '../../../../types'
-import type { OptionsApi } from '../../options-api'
 import * as t from '@babel/types'
 import { BaseOption } from './base'
 

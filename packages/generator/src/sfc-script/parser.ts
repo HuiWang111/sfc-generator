@@ -1,10 +1,18 @@
 import type { ParserOptions } from '@babel/parser'
 import type { ScriptParseOptions } from '../types'
+// import type { CompositionApi } from './composition-api'
 import { parse as babelParse } from '@babel/parser'
 import traverse from '@babel/traverse'
 import { OptionsApi } from './options-api'
 
-export function parse(code: string, options: ScriptParseOptions = {}) {
+export function parse<T = boolean>(
+  code: string,
+  options: ScriptParseOptions<T> = {},
+): {
+    // api: T extends true ? CompositionApi : OptionsApi
+    api: OptionsApi
+    ast: ReturnType<typeof babelParse>
+  } {
   const { lang, jsx = false, setup = false } = options
 
   const plugins: ParserOptions['plugins'] = []
@@ -39,7 +47,7 @@ export function parse(code: string, options: ScriptParseOptions = {}) {
   }
 
   return {
-    api: api as OptionsApi,
+    api,
     ast,
   }
 }

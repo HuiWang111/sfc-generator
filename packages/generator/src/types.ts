@@ -98,8 +98,8 @@ export interface SFCGenerateOptions {
   styles?: SFCBlock[]
 }
 
-export interface ScriptParseOptions {
-  setup?: boolean
+export interface ScriptParseOptions<T = boolean> {
+  setup?: T
   lang?: 'ts' | 'js'
   jsx?: boolean
 }

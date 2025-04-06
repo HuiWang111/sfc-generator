@@ -38,6 +38,17 @@ exports[`sfc script parser should work options create data should work 3`] = `
 };"
 `;
 
+exports[`sfc script parser should work options create methods should work 1`] = `
+"export default {
+  name: 'AInput',
+  methods: {
+    handleChange(val) {
+      this.data = val;
+    }
+  }
+};"
+`;
+
 exports[`sfc script parser should work options create watch should work 1`] = `
 "export default {
   name: 'AInput',
