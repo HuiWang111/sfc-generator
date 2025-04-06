@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sfc setup script parser should work ref crud should work 1`] = `
+"const checked = ref('');
+const value = ref("");"
+`;
+
+exports[`sfc setup script parser should work ref crud should work 2`] = `
+"const checked = ref(false);
+const value = ref("");"
+`;
+
+exports[`sfc setup script parser should work ref crud should work 3`] = `"const value = ref("");"`;
+
+exports[`sfc setup script parser should work ref crud should work 4`] = `
+{
+  "type": "StringLiteral",
+  "value": "",
+}
+`;

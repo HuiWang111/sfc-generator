@@ -10,7 +10,6 @@ import {
 } from './properties'
 
 export class OptionsApi {
-  // private isSetup: boolean
   private dataOption: DataOption | null = null
   private computedOption: ComputedOption | null = null
   private watchOption: WatchOption | null = null
