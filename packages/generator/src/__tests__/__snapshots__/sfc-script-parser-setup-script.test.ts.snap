@@ -1,5 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`sfc setup script parser should work computed crud should work 1`] = `
+"const firstName = ref('Davide');
+const lastName = ref('Li');
+const fullName = computed(() => firstName.value + lastName.value);
+const reverseName = computed(() => lastName.value + ' ' + firstName.value);"
+`;
+
+exports[`sfc setup script parser should work computed crud should work 2`] = `
+"const firstName = ref('Davide');
+const lastName = ref('Li');
+const fullName = computed(() => firstName.value + ' ' + lastName.value);
+const reverseName = computed(() => lastName.value + ' ' + firstName.value);"
+`;
+
+exports[`sfc setup script parser should work computed crud should work 3`] = `
+"const firstName = ref('Davide');
+const lastName = ref('Li');
+const reverseName = computed(() => lastName.value + ' ' + firstName.value);"
+`;
+
+exports[`sfc setup script parser should work computed crud should work 4`] = `
+{
+  "async": false,
+  "body": {
+    "left": {
+      "left": {
+        "computed": false,
+        "loc": undefined,
+        "object": {
+          "loc": undefined,
+          "name": "lastName",
+          "type": "Identifier",
+        },
+        "property": {
+          "loc": undefined,
+          "name": "value",
+          "type": "Identifier",
+        },
+        "type": "MemberExpression",
+      },
+      "loc": undefined,
+      "operator": "+",
+      "right": {
+        "extra": {
+          "raw": "' '",
+          "rawValue": " ",
+        },
+        "loc": undefined,
+        "type": "StringLiteral",
+        "value": " ",
+      },
+      "type": "BinaryExpression",
+    },
+    "loc": undefined,
+    "operator": "+",
+    "right": {
+      "computed": false,
+      "loc": undefined,
+      "object": {
+        "loc": undefined,
+        "name": "firstName",
+        "type": "Identifier",
+      },
+      "property": {
+        "loc": undefined,
+        "name": "value",
+        "type": "Identifier",
+      },
+      "type": "MemberExpression",
+    },
+    "type": "BinaryExpression",
+  },
+  "extra": {
+    "parenStart": 0,
+    "parenthesized": true,
+  },
+  "generator": false,
+  "loc": undefined,
+  "params": [],
+  "type": "ArrowFunctionExpression",
+}
+`;
+
 exports[`sfc setup script parser should work ref crud should work 1`] = `
 "const checked = ref('');
 const value = ref("");"
