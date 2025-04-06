@@ -1,7 +1,7 @@
 import type { Statement } from '@babel/types'
-import { CallExpressionOption } from './abstracts/call-expression'
+import { VariableCallExpressionOption } from './abstracts/variable-call-expression'
 
-export class RefOption extends CallExpressionOption {
+export class RefOption extends VariableCallExpressionOption {
   constructor(statements: Statement[]) {
     super(statements, 'ref')
   }

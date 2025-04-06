@@ -2,7 +2,7 @@ import type { Expression, Statement, VariableDeclaration } from '@babel/types'
 import type { OptionOperator } from '../../../../types'
 import * as t from '@babel/types'
 
-export abstract class CallExpressionOption implements OptionOperator {
+export abstract class VariableCallExpressionOption implements OptionOperator {
   constructor(
     private statements: Statement[],
     private calleeName: string,
