@@ -24,8 +24,18 @@ exports[`sfc script parser should work options create data should work 1`] = `
 
 exports[`sfc script parser should work options create data should work 2`] = `
 {
-  "type": "NumericLiteral",
-  "value": 1,
+  "computed": false,
+  "decorators": null,
+  "key": {
+    "name": "number",
+    "type": "Identifier",
+  },
+  "shorthand": false,
+  "type": "ObjectProperty",
+  "value": {
+    "type": "NumericLiteral",
+    "value": 1,
+  },
 }
 `;
 

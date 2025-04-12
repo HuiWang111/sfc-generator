@@ -50,13 +50,13 @@ export class PropsOption implements OptionOperator {
     }
   }
 
-  add(prop: ObjectProperty) {
+  add(prop: ObjectProperty): this {
     if (this.objectExpression)
       this.objectExpression.properties.push(prop)
     return this
   }
 
-  remove(name: string) {
+  remove(name: string): this {
     if (!this.objectExpression)
       return this
 
@@ -65,9 +65,10 @@ export class PropsOption implements OptionOperator {
         return true
       return t.isIdentifier(prop.key) && prop.key.name !== name
     })
+    return this
   }
 
-  update(prop: ObjectProperty) {
+  update(prop: ObjectProperty): this {
     if (!this.objectExpression)
       return this
 
@@ -83,16 +84,18 @@ export class PropsOption implements OptionOperator {
       }
       return p
     })
+    return this
   }
 
-  get(name: string) {
+  get(name: string): ObjectProperty | undefined {
     if (!this.objectExpression)
-      return this
+      return undefined
 
-    return this.objectExpression.properties.find((prop) => {
-      if (t.isSpreadElement(prop))
-        return false
-      return t.isIdentifier(prop.key) && prop.key.name === name
+    return this.objectExpression.properties.find((prop): prop is ObjectProperty => {
+      if (t.isObjectProperty(prop)) {
+        return t.isIdentifier(prop.key) && prop.key.name === name
+      }
+      return false
     })
   }
 }

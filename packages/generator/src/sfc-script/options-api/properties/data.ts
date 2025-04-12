@@ -1,4 +1,4 @@
-import type { Expression, ObjectMethod, PatternLike, ReturnStatement } from '@babel/types'
+import type { Expression, ObjectMethod, ObjectProperty, PatternLike, ReturnStatement } from '@babel/types'
 import type { OptionsApi } from '..'
 import type { OptionOperator } from '../../../types'
 import * as t from '@babel/types'
@@ -28,7 +28,7 @@ export class DataOption extends BaseOption<ObjectMethod> implements OptionOperat
     return this
   }
 
-  remove(name: string) {
+  remove(name: string): this {
     const returnNode = this.returnNode
     if (!returnNode || !t.isObjectExpression(returnNode.argument))
       return this
@@ -52,16 +52,16 @@ export class DataOption extends BaseOption<ObjectMethod> implements OptionOperat
     return this
   }
 
-  get(name: string) {
+  get(name: string): ObjectProperty | undefined {
     const returnNode = this.returnNode
     if (!returnNode || !t.isObjectExpression(returnNode.argument))
-      return null
+      return undefined
 
     for (const prop of returnNode.argument.properties) {
       if (t.isObjectProperty(prop) && t.isIdentifier(prop.key) && prop.key.name === name) {
-        return prop.value
+        return prop
       }
     }
-    return null
+    return undefined
   }
 }

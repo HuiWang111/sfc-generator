@@ -17,12 +17,12 @@ export abstract class ObjectExpressionOption extends BaseOption<ObjectProperty> 
     return value.properties
   }
 
-  add(prop: ObjectProperty | ObjectMethod) {
+  add(prop: ObjectProperty | ObjectMethod): this {
     this.properties.push(prop)
     return this
   }
 
-  remove(name: string) {
+  remove(name: string): this {
     (this._node.value as ObjectExpression).properties = this.properties.filter((prop) => {
       if (t.isSpreadElement(prop))
         return true
@@ -31,7 +31,7 @@ export abstract class ObjectExpressionOption extends BaseOption<ObjectProperty> 
     return this
   }
 
-  update(prop: ObjectProperty | ObjectMethod) {
+  update(prop: ObjectProperty | ObjectMethod): this {
     (this._node.value as ObjectExpression).properties = this.properties.map((p) => {
       if (t.isSpreadElement(p))
         return p
@@ -44,10 +44,11 @@ export abstract class ObjectExpressionOption extends BaseOption<ObjectProperty> 
       }
       return p
     })
+    return this
   }
 
-  get(name: string) {
-    return this.properties.find((prop) => {
+  get(name: string): ObjectProperty | ObjectMethod | undefined {
+    return this.properties.find((prop): prop is ObjectProperty | ObjectMethod => {
       if (t.isSpreadElement(prop))
         return false
       return t.isIdentifier(prop.key) && prop.key.name === name
