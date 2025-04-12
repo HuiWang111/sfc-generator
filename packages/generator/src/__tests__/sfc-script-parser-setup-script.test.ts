@@ -188,4 +188,18 @@ const fullName = computed(() => firstName.value + lastName.value)`
     const valueNode = api.methods().get('handleChange')
     expect(valueNode).toMatchSnapshot()
   })
+
+  it('watch crud should work', () => {
+    const js = `const x = ref(0)`
+
+    const { ast, api } = parse<true>(js, { setup: true })
+    if (!api)
+      return
+
+    api.watch().add(
+      template.statement('watch(x, (newX) => {\nconsole.log(`x is ${newX}`)\n})')() as t.ExpressionStatement
+    )
+    let { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+  })
 })

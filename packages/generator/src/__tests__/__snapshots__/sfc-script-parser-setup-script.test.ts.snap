@@ -275,3 +275,10 @@ exports[`sfc setup script parser should work update defineProps variableDeclarat
   },
 }
 `;
+
+exports[`sfc setup script parser should work watch crud should work 1`] = `
+"const x = ref(0);
+watch(x, newX => {
+  console.log(\`x is \${newX}\`);
+});"
+`;

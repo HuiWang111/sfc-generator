@@ -4,6 +4,7 @@ import {
   PropsOption,
   RefOption,
   MethodsOption,
+  WatchOption,
 } from './properties'
 
 export class CompositionApi {
@@ -11,6 +12,7 @@ export class CompositionApi {
   computedOption: ComputedOption | null = null
   propsOption: PropsOption | null = null
   methodsOption: MethodsOption | null = null
+  watchOption: WatchOption | null = null
 
   constructor(private statements: Statement[]) {}
 
@@ -36,5 +38,11 @@ export class CompositionApi {
     if (!this.methodsOption)
       this.methodsOption = new MethodsOption(this.statements)
     return this.methodsOption
+  }
+
+  watch() {
+    if (!this.watchOption)
+      this.watchOption = new WatchOption(this.statements)
+    return this.watchOption
   }
 }
