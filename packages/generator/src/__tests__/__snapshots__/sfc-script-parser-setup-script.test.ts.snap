@@ -83,6 +83,13 @@ exports[`sfc setup script parser should work computed crud should work 4`] = `
 }
 `;
 
+exports[`sfc setup script parser should work create defineProps should work 1`] = `
+"defineProps({
+  checked: Boolean
+});
+const str = ref('');"
+`;
+
 exports[`sfc setup script parser should work ref crud should work 1`] = `
 "const checked = ref('');
 const value = ref("");"
@@ -99,5 +106,85 @@ exports[`sfc setup script parser should work ref crud should work 4`] = `
 {
   "type": "StringLiteral",
   "value": "",
+}
+`;
+
+exports[`sfc setup script parser should work update defineProps callExpression should work 1`] = `
+"defineProps({
+  value: {
+    type: String,
+    default: ''
+  },
+  checked: Boolean
+});"
+`;
+
+exports[`sfc setup script parser should work update defineProps callExpression should work 2`] = `
+"defineProps({
+  value: String,
+  checked: Boolean
+});"
+`;
+
+exports[`sfc setup script parser should work update defineProps callExpression should work 3`] = `
+"defineProps({
+  checked: Boolean
+});"
+`;
+
+exports[`sfc setup script parser should work update defineProps callExpression should work 4`] = `
+{
+  "computed": false,
+  "decorators": null,
+  "key": {
+    "name": "checked",
+    "type": "Identifier",
+  },
+  "shorthand": false,
+  "type": "ObjectProperty",
+  "value": {
+    "name": "Boolean",
+    "type": "Identifier",
+  },
+}
+`;
+
+exports[`sfc setup script parser should work update defineProps variableDeclaration should work 1`] = `
+"const props = defineProps({
+  value: {
+    type: String,
+    default: ''
+  },
+  checked: Boolean
+});"
+`;
+
+exports[`sfc setup script parser should work update defineProps variableDeclaration should work 2`] = `
+"const props = defineProps({
+  value: String,
+  checked: Boolean
+});"
+`;
+
+exports[`sfc setup script parser should work update defineProps variableDeclaration should work 3`] = `
+"const props = defineProps({
+  checked: Boolean
+});"
+`;
+
+exports[`sfc setup script parser should work update defineProps variableDeclaration should work 4`] = `
+{
+  "computed": false,
+  "decorators": null,
+  "key": {
+    "name": "checked",
+    "type": "Identifier",
+  },
+  "shorthand": false,
+  "type": "ObjectProperty",
+  "value": {
+    "name": "Boolean",
+    "type": "Identifier",
+  },
 }
 `;

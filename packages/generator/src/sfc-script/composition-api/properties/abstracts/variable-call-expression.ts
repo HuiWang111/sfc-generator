@@ -18,7 +18,7 @@ export abstract class VariableCallExpressionOption implements OptionOperator {
             t.callExpression(
               t.identifier(this.calleeName),
               [value],
-            )
+            ),
           ),
         ],
       ),
@@ -27,14 +27,13 @@ export abstract class VariableCallExpressionOption implements OptionOperator {
   }
 
   remove(name: string): this {
-    const index = this.statements.findIndex(s => {
+    const index = this.statements.findIndex((s) => {
       if (t.isVariableDeclaration(s)) {
-        for (const d of s.declarations) {
+        return s.declarations.some((d) => {
           return t.isIdentifier(d.id) && d.id.name === name
-        }
-        return true
+        })
       }
-      return true
+      return false
     })
     if (index > -1) {
       this.statements.splice(index, 1)

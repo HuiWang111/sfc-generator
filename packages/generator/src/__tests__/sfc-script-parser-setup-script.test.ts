@@ -13,7 +13,7 @@ describe('sfc setup script parser should work', () => {
 
     api.data().add(
       'value',
-      t.stringLiteral('')
+      t.stringLiteral(''),
     )
     let { code } = generate(ast)
     expect(code).toMatchSnapshot()
@@ -41,14 +41,14 @@ const fullName = computed(() => firstName.value + lastName.value)`
 
     api.computed().add(
       'reverseName',
-      template.expression('() => lastName.value + \' \' + firstName.value')()
+      template.expression('() => lastName.value + \' \' + firstName.value')(),
     )
     let { code } = generate(ast)
     expect(code).toMatchSnapshot()
 
     api.computed().update(
       'fullName',
-      template.expression('() => firstName.value + \' \' + lastName.value')()
+      template.expression('() => firstName.value + \' \' + lastName.value')(),
     );
     ({ code } = generate(ast))
     expect(code).toMatchSnapshot()
@@ -59,5 +59,97 @@ const fullName = computed(() => firstName.value + lastName.value)`
 
     const valueNode = api.computed().get('reverseName')
     expect(valueNode).toMatchSnapshot()
+  })
+
+  it('update defineProps callExpression should work', () => {
+    const js = `defineProps({
+      value: {
+        type: String,
+        default: '',
+      },
+    })`
+
+    const { ast, api } = parse<true>(js, { setup: true })
+    if (!api)
+      return
+
+    api.props().add(
+      t.objectProperty(
+        t.identifier('checked'),
+        t.identifier('Boolean'),
+      ),
+    )
+    let { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+
+    api.props().update(
+      t.objectProperty(
+        t.identifier('value'),
+        t.identifier('String'),
+      ),
+    );
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    api.props().remove('value');
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    const valueNode = api.props().get('checked')
+    expect(valueNode).toMatchSnapshot()
+  })
+
+  it('update defineProps variableDeclaration should work', () => {
+    const js = `const props = defineProps({
+      value: {
+        type: String,
+        default: '',
+      },
+    })`
+
+    const { ast, api } = parse<true>(js, { setup: true })
+    if (!api)
+      return
+
+    api.props().add(
+      t.objectProperty(
+        t.identifier('checked'),
+        t.identifier('Boolean'),
+      ),
+    )
+    let { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+
+    api.props().update(
+      t.objectProperty(
+        t.identifier('value'),
+        t.identifier('String'),
+      ),
+    );
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    api.props().remove('value');
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    const valueNode = api.props().get('checked')
+    expect(valueNode).toMatchSnapshot()
+  })
+
+  it('create defineProps should work', () => {
+    const js = `const str = ref('')`
+    const { ast, api } = parse<true>(js, { setup: true })
+    if (!api)
+      return
+
+    api.props().add(
+      t.objectProperty(
+        t.identifier('checked'),
+        t.identifier('Boolean'),
+      ),
+    )
+    const { code } = generate(ast)
+    expect(code).toMatchSnapshot()
   })
 })
