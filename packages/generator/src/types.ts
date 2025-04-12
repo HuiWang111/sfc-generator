@@ -1,6 +1,5 @@
 import type generate from '@babel/generator'
 import type { GeneratorOptions } from '@babel/generator'
-import type { Expression, PatternLike } from '@babel/types'
 import type { SFCBlock } from '@vue/compiler-sfc'
 import type { TemplateNodeType } from './constants'
 

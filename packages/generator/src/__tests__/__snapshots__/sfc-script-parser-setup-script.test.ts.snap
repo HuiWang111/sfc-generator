@@ -90,6 +90,93 @@ exports[`sfc setup script parser should work create defineProps should work 1`] 
 const str = ref('');"
 `;
 
+exports[`sfc setup script parser should work methods crud should work 1`] = `
+"const inputValue = ref('');
+const checked = ref(false);
+function handleInput(val) {
+  inputValue.value = val;
+}
+function handleChange(val) {
+  checked.value = val;
+}"
+`;
+
+exports[`sfc setup script parser should work methods crud should work 2`] = `
+"const inputValue = ref('');
+const checked = ref(false);
+function handleInput(value) {
+  inputValue.value = value;
+}
+function handleChange(val) {
+  checked.value = val;
+}"
+`;
+
+exports[`sfc setup script parser should work methods crud should work 3`] = `
+"const inputValue = ref('');
+const checked = ref(false);
+function handleChange(val) {
+  checked.value = val;
+}"
+`;
+
+exports[`sfc setup script parser should work methods crud should work 4`] = `
+{
+  "async": false,
+  "body": {
+    "body": [
+      {
+        "expression": {
+          "left": {
+            "computed": false,
+            "loc": undefined,
+            "object": {
+              "loc": undefined,
+              "name": "checked",
+              "type": "Identifier",
+            },
+            "property": {
+              "loc": undefined,
+              "name": "value",
+              "type": "Identifier",
+            },
+            "type": "MemberExpression",
+          },
+          "loc": undefined,
+          "operator": "=",
+          "right": {
+            "loc": undefined,
+            "name": "val",
+            "type": "Identifier",
+          },
+          "type": "AssignmentExpression",
+        },
+        "loc": undefined,
+        "type": "ExpressionStatement",
+      },
+    ],
+    "directives": [],
+    "loc": undefined,
+    "type": "BlockStatement",
+  },
+  "generator": false,
+  "id": {
+    "loc": undefined,
+    "name": "handleChange",
+    "type": "Identifier",
+  },
+  "loc": undefined,
+  "params": [
+    {
+      "loc": undefined,
+      "name": "val",
+      "type": "Identifier",
+    },
+  ],
+  "type": "FunctionDeclaration",
+}
+`;
+
 exports[`sfc setup script parser should work ref crud should work 1`] = `
 "const checked = ref('');
 const value = ref("");"

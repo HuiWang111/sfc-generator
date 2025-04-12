@@ -152,4 +152,40 @@ const fullName = computed(() => firstName.value + lastName.value)`
     const { code } = generate(ast)
     expect(code).toMatchSnapshot()
   })
+
+  it('methods crud should work', () => {
+    const js = `const inputValue = ref('')
+    const checked = ref(false)
+
+    function handleInput(val) {
+      inputValue.value = val
+    }`
+
+    const { ast, api } = parse<true>(js, { setup: true })
+    if (!api)
+      return
+
+    api.methods().add(
+      template.statement(`function handleChange(val){
+        checked.value = val
+      }`)() as t.FunctionDeclaration,
+    )
+    let { code } = generate(ast)
+    expect(code).toMatchSnapshot()
+
+    api.methods().update(
+      template.statement(`function handleInput(value) {
+        inputValue.value = value
+      }`)() as t.FunctionDeclaration,
+    );
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    api.methods().remove('handleInput');
+    ({ code } = generate(ast))
+    expect(code).toMatchSnapshot()
+
+    const valueNode = api.methods().get('handleChange')
+    expect(valueNode).toMatchSnapshot()
+  })
 })
