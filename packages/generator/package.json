@@ -1,6 +1,6 @@
 {
   "name": "@asiimov/sfc-generator",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Utilities for generate Vue Single File Components",
   "author": "kennys wang <kennys_wang@163.com>",
   "license": "ISC",
