@@ -29,6 +29,7 @@
     "**/gulpfile.mjs",
     "**/README.md",
     "**/*.json",
+    "!packages/**/*.json",
     "**/yarn.lock",
     "**/.babelrc",
     "**/.eslintignore",
