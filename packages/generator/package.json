@@ -9,21 +9,15 @@
     "generator",
     "vue"
   ],
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./es/index.d.ts",
-        "default": "./es/index.js"
-      },
-      "require": {
-        "types": "./lib/index.d.ts",
-        "default": "./lib/index.js"
-      }
-    }
-  },
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "es/index.d.ts",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "files": [
+    "README.md",
+    "es",
+    "lib",
+    "package.json"
+  ],
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "jest --watch",
