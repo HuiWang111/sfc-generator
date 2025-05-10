@@ -47,7 +47,7 @@ export class Template {
     shouldBreak: boolean,
   ) {
     if (!node.children || !node.children.length) {
-      return this.padCode('/>', indentCount)
+      return this.padCode('/>', shouldBreak ? indentCount : 0.5)
     }
 
     const { autoIndent = true } = this.options
@@ -67,13 +67,13 @@ export class Template {
 
   generate(node: TemplateNode, indentCount = 1): string {
     if (
-      isInterpolationNode(node) ||
-      isTextNode(node)
+      isInterpolationNode(node)
+      || isTextNode(node)
     ) {
       if (isTextNode(node) && node.text === ' ') {
         return '\n'
       }
-      return this.padCode(node.text, indentCount)
+      return this.padCode(node.text.trim(), indentCount)
     }
 
     const { autoIndent = true } = this.options

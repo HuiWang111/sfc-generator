@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test generateComponent generateComponent should work 1`] = `
+"<template>
+  <div>
+    <n-btn style="margin-bottom: 10px;" @click="toggleLocale">
+      {{ localeCode.includes('zh') ? '切换语言' : 'toggle language' }}
+    </n-btn>
+    <n-config-provider :locale="locale">
+      <n-empty />
+    </n-config-provider>
+  </div>
+</template>
+
+<script setup>
+import { computed, onMounted, ref } from 'vue';
+import { en, zhCN } from '../../locale';
+const localeCode = ref('zh-cn');
+const locale = computed(() => localeCode.value.includes('zh') ? zhCN : en);
+const toggleLocale = () => {
+  localeCode.value = localeCode.value.includes('zh') ? 'en' : 'zh';
+};
+onMounted(() => {
+  localeCode.value = window.navigator.language;
+});
+</script>"
+`;

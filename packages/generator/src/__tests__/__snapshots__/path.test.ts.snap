@@ -2,7 +2,7 @@
 
 exports[`test path remove should work 1`] = `
 "<template>
-  <form-creator-config-provider :locale="locale"  />
+  <form-creator-config-provider :locale="locale" />
 </template>"
 `;
 
