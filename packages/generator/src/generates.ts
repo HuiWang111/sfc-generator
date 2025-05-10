@@ -44,11 +44,18 @@ export function generateScript(
     type: TemplateNodeType.Text,
     text: code,
   }
+  const attrsMap = Object.entries(attrs).reduce<Record<string, string>>((acc, [key, value]) => {
+    if (value != null) {
+      acc[key] = value
+    }
+    return acc
+  }, {})
+
   return template.generate(
     {
       type: TemplateNodeType.Element,
       tag: 'script',
-      attrsMap: attrs as Record<string, string>,
+      attrsMap,
       children: [scriptContentNode],
     },
     0,
@@ -111,4 +118,4 @@ export function generateComponent(opts: SFCGenerateOptions) {
   }
 
   return list.join('\n\n')
-} 
+}
