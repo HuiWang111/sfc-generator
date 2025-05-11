@@ -62,3 +62,34 @@ exports[`test generate template test generate simple node with interpolation exp
     {{ test }}
   </div>"
 `;
+
+exports[`test generate template test generate with scopedSlots 1`] = `
+"  <n-selector style="width: 30px;">
+    <template #trigger="{ toggle }">
+      <div
+        id="portrait-more"
+        style="cursor: pointer;width: 30px;height: 30px;"
+        @click="toggle"
+        v-html="moreIcon"
+      />
+    </template>
+    <template #panel>
+      <n-selector-item>
+        <help
+          label="帮助"
+          :icon-size="26"
+          :config-list="configList"
+        >
+          <template #title>
+            <div>
+              自定义 title
+            </div>
+          </template>
+        </help>
+      </n-selector-item>
+    </template>
+    <span>
+      children
+    </span>
+  </n-selector>"
+`;

@@ -53,6 +53,13 @@ export interface ElementNode {
   directives?: TemplateNodeDirective[]
   model?: TemplateNodeModel
   __skip__?: boolean
+  scopedSlots?: Record<string, SlotElementNode>
+}
+
+export interface SlotElementNode extends ElementNode {
+  slotScope?: string // eg: '{ toggle }'，'_empty_' 代表没有参数
+  slotTarget: string // '"trigger"'
+  slotTargetDynamic: boolean
 }
 
 export interface InterpolationNode {

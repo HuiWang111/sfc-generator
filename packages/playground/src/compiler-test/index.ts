@@ -7,7 +7,7 @@ import { compileScript, compileStyle, compileTemplate, parseComponent } from '@v
 main()
 
 async function main() {
-  const sfc = await readFile(join(__dirname, 'sfc/default.vue'), 'utf-8')
+  const sfc = await readFile(join(__dirname, 'sfc/with-slot.vue'), 'utf-8')
   const sfcDescriptor = parseComponent(sfc)
 
   if (sfcDescriptor.template) {
@@ -19,11 +19,11 @@ async function main() {
     // console.log(template.code)
     const ast = template.ast as Record<string, any>
     // console.log(ast)
-    // console.log(ast.children[0].children[0].children[0])
+    console.log(ast.scopedSlots)
   }
 
   const script = compileScript(sfcDescriptor)
-  console.log(script)
+  // console.log(script)
 
   sfcDescriptor.styles.forEach((style) => {
     const res = compileStyle({

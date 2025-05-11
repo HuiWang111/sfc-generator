@@ -41,28 +41,64 @@ export class Template {
     return [attrCodes.join('\n'), shouldBreak]
   }
 
+  private generateScopedSlots(
+    node: ElementNode,
+    indentCount: number,
+  ) {
+    const { autoIndent = true } = this.options
+
+    let scopedSlotsCode = ''
+    if (node.scopedSlots) {
+      scopedSlotsCode = (
+        Object.values(node.scopedSlots)
+          .map((slot) => {
+            return this.generate(slot, autoIndent ? indentCount + 1 : indentCount)
+          })
+          .join('\n')
+      )
+    }
+
+    return scopedSlotsCode
+  }
+
+  private generateChildren(
+    node: ElementNode,
+    indentCount: number,
+  ) {
+    const { autoIndent = true } = this.options
+
+    let childrenCode = ''
+    if (node.children && node.children.length) {
+      childrenCode = (
+        node.children
+          .map((c) => {
+            return this.generate(c, autoIndent ? indentCount + 1 : indentCount)
+          })
+          .join('')
+      )
+    }
+
+    return childrenCode
+  }
+
   private generateEndTag(
     node: ElementNode,
     indentCount: number,
     shouldBreak: boolean,
   ) {
-    if (!node.children || !node.children.length) {
+    if (
+      (!node.children || !node.children.length)
+      && !node.scopedSlots
+    ) {
       return this.padCode('/>', shouldBreak ? indentCount : 0.5)
     }
 
-    const { autoIndent = true } = this.options
-    const childrenCode = (
-      node.children
-        .map((c) => {
-          return this.generate(c, autoIndent ? indentCount + 1 : indentCount)
-        })
-        .join('')
-    )
     return [
       this.padCode('>', shouldBreak ? indentCount : 0),
-      childrenCode,
+      this.generateScopedSlots(node, indentCount),
+      this.generateChildren(node, indentCount),
       this.padCode(`</${node.tag}>`, indentCount),
-    ].join('\n')
+    ].filter(Boolean).join('\n')
   }
 
   generate(node: TemplateNode, indentCount = 1): string {
