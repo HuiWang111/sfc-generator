@@ -36,7 +36,10 @@ export function generateScript(
   attrs: ScriptAttrs = {},
   opts: GeneratorOptions = {},
 ) {
-  const { code } = generate(node, opts)
+  const { code } = generate(node, {
+    retainLines: true,
+    ...opts,
+  })
   const template = new Template({
     autoIndent: false,
   })

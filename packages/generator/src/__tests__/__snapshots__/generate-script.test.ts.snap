@@ -3,6 +3,7 @@
 exports[`test generateScript generateScript should work 1`] = `
 "<script>
 import { ref } from 'vue';
+
 const visible = ref(false);
 function setVisible(v) {
   visible.value = v;
@@ -13,6 +14,7 @@ function setVisible(v) {
 exports[`test generateScript generateScript should work with script attrs 1`] = `
 "<script lang="ts" setup>
 import { ref } from 'vue';
+
 const visible = ref(false);
 function setVisible(v) {
   visible.value = v;

@@ -15,11 +15,16 @@ exports[`test generateComponent generateComponent should work 1`] = `
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { en, zhCN } from '../../locale';
+
 const localeCode = ref('zh-cn');
 const locale = computed(() => localeCode.value.includes('zh') ? zhCN : en);
+
 const toggleLocale = () => {
-  localeCode.value = localeCode.value.includes('zh') ? 'en' : 'zh';
+  localeCode.value = localeCode.value.includes('zh') ?
+  'en' :
+  'zh';
 };
+
 onMounted(() => {
   localeCode.value = window.navigator.language;
 });
